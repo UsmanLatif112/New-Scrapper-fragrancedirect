@@ -1,20 +1,11 @@
 from lib.imports import *
 from lib.page import *
-import os
-import time
-import logging
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
         
 def main():
     driver = initialize_and_navigate(url)
     action_chains = ActionChains(driver)
     csvv = HomePage(driver)
-    csvv.make_csv('fragrancedirect.csv', 'Title,RRP Price,Product overview,Product details\n\n')
+    csvv.make_csv('fragrancedirect.csv', 'Title,updated title,Price,updated price,weight,Product overview,Range,Brand,Volume\n\n')
     
     mainpage = HomePage(driver)
     mainpage.wait(Fragrancess.Fragrance)
@@ -98,16 +89,52 @@ def main():
                 product_detaill = HomePage(driver)
                 product_detaill.click_btn(Fragrancess.product_detailll)
                 time.sleep(0.5)
-                product_de = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, Fragrancess.product_detaiL)))
+                try:
+                    product_range = driver.find_element(By.XPATH, Fragrancess.RANGE)
+                    if product_range:
+                        print("product_range.text")
+                except:
+                    print("Range not found")
                 
-                product_details_list = []
-                for pro in product_de:
-                    product_details_list.append(pro.text.replace('"', '""').replace('\n', ' '))
+                time.sleep(0.5)
+                try:
+                    product_brand = driver.find_element(By.XPATH, Fragrancess.BRAND)
+                    if product_range:
+                        print("product_brand.text")
+                except:
+                    print("Range not found")
                 
-                product_details_str = '|'.join(product_details_list)
+                time.sleep(0.5)
+                try:
+                    product_volume = driver.find_element(By.XPATH, Fragrancess.VOLUME)
+                    if product_range:
+                        print("product_volume.text")
+                except:
+                    print("Range not found")
+                # product_de = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, Fragrancess.product_detaiL)))
+                # product_details_list = []
+                # for pro in product_de:
+                #     product_details_list.append(pro.text.replace('"', '""').replace('\n', ' '))
+                
+                # product_details_str = '|'.join(product_details_list)
                 product_title = product_titlee.text.replace('"', '""').strip()
+                product_range = product_range.text.replace('"', '""').strip()
+                product_brand = product_brand.text.replace('"', '""').strip()
+                product_volume = product_volume.text.replace('"', '""').strip()
                 
-                csvv.make_csv('fragrancedirect.csv', f'"{product_title}","{product_rrp_text}","{product_over_text}","{product_details_str}"\n', new=False)
+                if product_brand in product_title:
+                    updated_title = product_title.replace(product_brand, '').strip()
+                
+                time.sleep(0.5)
+                product_price = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, Fragrancess.RRP)))
+                product_price_text = product_price.text.replace('RRP:', '').replace('£', '').strip()
+                updated_price = float(product_price_text) * 1.5
+                
+                weight_match = re.search(r'(\d+ml|\d+ ml)', product_title, re.IGNORECASE)
+                if weight_match:
+                    weight = weight_match.group(1).strip()
+                    
+                csvv.make_csv('fragrancedirect.csv', f'"{product_title}","{updated_title}","{product_rrp_text}","{updated_price}","{weight}","{product_over_text}","{product_range}","{product_brand}","{product_volume}"\n', new=False)
                 
                 time.sleep(2)
                 driver.close()

@@ -1,5 +1,14 @@
-from lib.imports import *
-from lib.resources import Fragrancess
+import requests
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+import os
+import csv
+from PIL import Image
+import logging
+
+
 
 
 def navigate_to_next_page(driver, next_button_xpath):
@@ -40,7 +49,7 @@ class HomePage(BasePage):
     def click_btn(self, xpath: str):
         self.driver.find_element(By.XPATH, xpath).click()
         
-    def enter_Name(self, xpath: str, clientname: str):
+    def enter_name(self, xpath: str, clientname: str):
         self.driver.find_element(By.XPATH, xpath).send_keys(clientname)
         
     def enter_name_delay(self, xpath: str, clientname: str, delay=0.2):
@@ -57,9 +66,8 @@ class HomePage(BasePage):
             )
             return element
         except Exception as e:
-            print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
             raise e
-    
     
     def make_csv(self, filename: str, data, new=True):
         mode = 'w' if new else 'a'
