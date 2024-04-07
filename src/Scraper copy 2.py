@@ -86,7 +86,7 @@ def main():
                 product_range = ''
                 product_brand = ''
                 product_volume = ''
-                updated_title = ''
+                # updated_title = ''
 
                 try:
                     product_rrp = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, Fragrancess.RRP)))
