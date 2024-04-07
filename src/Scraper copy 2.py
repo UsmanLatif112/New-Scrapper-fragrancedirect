@@ -14,7 +14,7 @@ def main():
     driver = initialize_and_navigate(url)
     action_chains = ActionChains(driver)
     csvv = HomePage(driver)
-    csvv.make_csv('fragrancedirect.csv', 'Title,updated title,Price,updated price,weight,Product overview,Range,Brand,Volume\n\n')
+    csvv.make_csv('fragrancedirect.csv', 'Title,Price,updated price,weight,Product overview,Range,Brand,Volume,URL\n')
 
     mainpage = HomePage(driver)
     mainpage.wait(Fragrancess.Fragrance)
