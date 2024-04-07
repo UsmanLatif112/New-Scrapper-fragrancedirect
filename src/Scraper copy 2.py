@@ -141,8 +141,8 @@ def main():
 
                 weight_match = re.search(r'(\d+ml|\d+ ml)', product_titlee.text, re.IGNORECASE)
                 weight = weight_match.group(1).strip() if weight_match else ''
-
-                csvv.make_csv('fragrancedirect.csv', f'"{product_titlee.text}","{product_rrp_text}","{updated_price}","{weight}","{product_over_text}","{product_range}","{product_brand}","{product_volume}"\n', new=False)
+                current_url = driver.current_url
+                csvv.make_csv('fragrancedirect.csv', f'"{product_titlee.text}","{product_rrp_text}","{updated_price}","{weight}","{product_over_text}","{product_range}","{product_brand}","{product_volume}",{current_url}\n', new=False)
 
                 time.sleep(2)
                 driver.close()
