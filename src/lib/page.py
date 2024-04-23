@@ -13,6 +13,7 @@ import logging
 
 def navigate_to_next_page(driver, next_button_xpath):
     try:
+        time.sleep(2)
         next_button = driver.find_element(By.XPATH, next_button_xpath)
         next_button.click()
         time.sleep(3)  # wait for the page to load
@@ -59,7 +60,46 @@ class HomePage(BasePage):
             element.send_keys(char)
             time.sleep(delay)
             
-    def wait(self, xpath, timeout=10):
+    def wait(self, xpath, timeout=30):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
+        
+    def waiTENt(self, xpath, timeout=10):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
+        
+    def waaiite(self, xpath, timeout=10):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
+        
+    def waitsix(self, xpath, timeout=120):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
+    def waitinput(self, xpath, timeout=10):
         try:
             element = WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located((By.XPATH, xpath))
@@ -69,7 +109,7 @@ class HomePage(BasePage):
             logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
             raise e
     
-    def make_csv(self, filename: str, data, new=True):
+    def make_csv(self, filename: str, data, new=True, encoding='utf-8'):
         mode = 'w' if new else 'a'
-        with open(filename, mode, newline='') as f:
+        with open(filename, mode, newline='', encoding=encoding) as f:
             f.writelines(data)
