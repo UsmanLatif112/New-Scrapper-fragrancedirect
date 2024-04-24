@@ -7,6 +7,8 @@ Password = "nE8h!$F3s9sdtfH"
 
 
 
+# import pdb
+# pdb.set_trace()
 # # Click the address bar
 # pyautogui.hotkey('alt', 'd')
 # pyautogui.typewrite(target_directory_path)

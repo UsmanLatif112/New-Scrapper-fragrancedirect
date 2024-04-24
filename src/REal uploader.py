@@ -7,6 +7,7 @@ import os
 import time
 import logging
 import re, pyperclip
+from selenium.webdriver.common.action_chains import ActionChains
 
 def main():
     
@@ -60,7 +61,7 @@ def main():
         
         time.sleep(1)
         select_account_pageee = HomePage(driver)
-        select_account_pageee.wait(Uploaderdata.select_account_page)
+        select_account_pageee.waitsix(Uploaderdata.select_account_page)
         
         time.sleep(1)
         select_account_btn = HomePage(driver)
@@ -69,7 +70,7 @@ def main():
         try:
             time.sleep(1)
             con_browserr = HomePage(driver)
-            con_browserr.wait(Uploaderdata.con_browser)
+            con_browserr.waitsix(Uploaderdata.con_browser)
             
             if con_browserr:
                 time.sleep(1)
@@ -87,17 +88,11 @@ def main():
         main_page_storee.wait(Uploaderdata.main_page_store)
         
 
-        csv_file_path = 'E:\\New Scrapper fragrancedirect\\Simpleproduct.csv'  # Replace with the actual path to your CSV file
-        titles_list = []
-        # Open the CSV file
+        csv_file_path = 'E:\\New Scrapper fragrancedirect\\Simpleproduct.csv'
         
         with open(csv_file_path, 'r') as file:
             reader = csv.reader(file)
-            
-            # Skip the header row
             next(reader)
-            
-            # Iterate over the rows and retrieve values from the specific column
             for row in reader:
                 try:
                     
@@ -184,10 +179,13 @@ def main():
                             time.sleep(5)
                             action_chains.send_keys(Keys.ENTER).perform()
                             time.sleep(1)
-                            pyautogui.hotkey("ctrl", "a")
                             time.sleep(1)
-                            pyautogui.press('backspace')
+                            Collectionn = HomePage(driver)
+                            Collectionn.click_btn(Uploaderdata.Collection)
                             time.sleep(1)
+                            action_chains.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL).send_keys(Keys.BACK_SPACE).perform()
+                            time.sleep(2)
+                            
                     except:
                         pass
                     
@@ -257,6 +255,52 @@ def main():
                     except Exception as e:
                         print(e)
                     
+                    try:
+                        try:
+                            
+                            SKU_find = HomePage(driver)
+                            SKU_find.waitinput(Uploaderdata.SKU_CLICK_INPUT)
+                            time.sleep(1)
+                            SKU_CLICK_INPUTc = driver.find_element(By.XPATH, Uploaderdata.SKU_CLICK_INPUT)
+                            action_chains.move_to_element(SKU_CLICK_INPUTc).perform()
+                            if SKU_find:
+                                try:
+                                    time.sleep(1)
+                                    SKU_CLICK_INPUTt = HomePage(driver)
+                                    SKU_CLICK_INPUTt.click_btn(Uploaderdata.SKU_CLICK_INPUT)
+                                except:
+                                    pass
+                                try:
+                                    time.sleep(1)
+                                    SKU_CLICK_INPUTtt = HomePage(driver)
+                                    SKU_CLICK_INPUTtt.enter_name(Uploaderdata.SKU_CLICK_INPUT, skunumber)
+                                except:
+                                    pass
+                        except:
+                            try:
+                                time.sleep(1)
+                                SKU_CLICK_BTNn = HomePage(driver)
+                                SKU_CLICK_BTNn.click_btn(Uploaderdata.SKU_CLICK_BTN)
+                            except:
+                                pass
+                            
+                            try:
+                                time.sleep(1)
+                                SKU_CLICK_INPUTt = HomePage(driver)
+                                SKU_CLICK_INPUTt.click_btn(Uploaderdata.SKU_CLICK_INPUT)
+                            except:
+                                pass
+                            try:
+                                time.sleep(1)
+                                SKU_CLICK_INPUTtt = HomePage(driver)
+                                SKU_CLICK_INPUTtt.enter_name(Uploaderdata.SKU_CLICK_INPUT, skunumber)
+                            except:
+                                pass
+                            
+                            time.sleep(10)
+                    except Exception as e:
+                        print(e)
+                        
                     time.sleep(2)
                     Quantityy = HomePage(driver)
                     Quantityy.click_btn(Uploaderdata.Quantity)
@@ -307,91 +351,33 @@ def main():
                     Variant_savee.click_btn(Uploaderdata.Variant_save)
                     
                     upload_media_bttn = driver.find_element(By.XPATH, Uploaderdata.upload_media_btn)
-                    action_chains.move_to_element(upload_media_bttn).perform()        
-                    
-                    time.sleep(1)
-                    upload_media_btnn = HomePage(driver)
-                    upload_media_btnn.click_btn(Uploaderdata.upload_media_btn)
-                    
-                    image_url_modall = HomePage(driver)
-                    image_url_modall.waitinput(Uploaderdata.image_url_modal)
-                    
-                    time.sleep(1)
-                    image_url_modal_feildd = HomePage(driver)
-                    image_url_modal_feildd.click_btn(Uploaderdata.image_url_modal_feild)
+                    action_chains.move_to_element(upload_media_bttn).perform()
                     time.sleep(1)
                     for srcc in img_srcs:
-                        time.sleep(1)
-                        image_url_modal_feilldd = HomePage(driver)
-                        image_url_modal_feilldd.enter_name(Uploaderdata.image_url_modal_feild, f"{srcc}")
-                        time.sleep(1)
-                        image_url_modal_btnn = HomePage(driver)
-                        image_url_modal_btnn.click_btn(Uploaderdata.image_url_modal_btn)
-                        time.sleep(10)
-                        time.sleep(1)
-                        upload_media_btnn = HomePage(driver)
-                        upload_media_btnn.click_btn(Uploaderdata.upload_media_btn)
-                        
-                        image_url_modall = HomePage(driver)
-                        image_url_modall.waitinput(Uploaderdata.image_url_modal)
-                        
-                        time.sleep(1)
-                        image_url_modal_feildd = HomePage(driver)
-                        image_url_modal_feildd.click_btn(Uploaderdata.image_url_modal_feild)
-                    
-                    import pdb
-                    pdb.set_trace()
-                    
-                    time.sleep(1)
-                    action_chains.send_keys(Keys.ESCAPE).perform()
-                    time.sleep(1)
-                    
-                    try:
                         try:
-                            SKU_find = HomePage(driver)
-                            SKU_find.waitinput(Uploaderdata.SKU_CLICK_INPUT)
-                            if SKU_find:
-                                try:
-                                    time.sleep(1)
-                                    SKU_CLICK_INPUTt = HomePage(driver)
-                                    SKU_CLICK_INPUTt.click_btn(Uploaderdata.SKU_CLICK_INPUT)
-                                except:
-                                    pass
-                                try:
-                                    time.sleep(1)
-                                    SKU_CLICK_INPUTtt = HomePage(driver)
-                                    SKU_CLICK_INPUTtt.enter_name(Uploaderdata.SKU_CLICK_INPUT, skunumber)
-                                except:
-                                    pass
+                            time.sleep(1)
+                            upload_media_btnn = HomePage(driver)
+                            upload_media_btnn.click_btn(Uploaderdata.upload_media_btn)
+                            image_url_modall = HomePage(driver)
+                            image_url_modall.waitinput(Uploaderdata.image_url_modal)
+                            time.sleep(1)
+                            image_url_modal_feildd = HomePage(driver)
+                            image_url_modal_feildd.click_btn(Uploaderdata.image_url_modal_feild)
+                            time.sleep(1)
+                            image_url_modal_feilldd = HomePage(driver)
+                            image_url_modal_feilldd.enter_name(Uploaderdata.image_url_modal_feild, f"{srcc}")
+                            time.sleep(1)
+                            image_url_modal_btnn = HomePage(driver)
+                            image_url_modal_btnn.click_btn(Uploaderdata.image_url_modal_btn)
+                            time.sleep(10)
                         except:
-                            try:
-                                time.sleep(1)
-                                SKU_CLICK_BTNn = HomePage(driver)
-                                SKU_CLICK_BTNn.click_btn(Uploaderdata.SKU_CLICK_BTN)
-                            except:
-                                pass
-                            
-                            try:
-                                time.sleep(1)
-                                SKU_CLICK_INPUTt = HomePage(driver)
-                                SKU_CLICK_INPUTt.click_btn(Uploaderdata.SKU_CLICK_INPUT)
-                            except:
-                                pass
-                            try:
-                                time.sleep(1)
-                                SKU_CLICK_INPUTtt = HomePage(driver)
-                                SKU_CLICK_INPUTtt.enter_name(Uploaderdata.SKU_CLICK_INPUT, skunumber)
-                            except:
-                                pass
-                    except Exception as e:
-                        print(e)
+                            time.sleep(1)
+                            action_chains.send_keys(Keys.ESCAPE).perform()
+                            time.sleep(1)
                         
-                    time.sleep(10)
-                    
                     save_bttn = driver.find_element(By.XPATH, Uploaderdata.save_btn)
                     action_chains.move_to_element(save_bttn).perform()
-                    
-                    time.sleep(0.5)
+                    time.sleep(1)
                     save_btnn = HomePage(driver)
                     save_btnn.click_btn(Uploaderdata.save_btn)
                     
