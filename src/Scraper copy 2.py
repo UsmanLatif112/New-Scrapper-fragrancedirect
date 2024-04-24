@@ -16,6 +16,7 @@ def main():
     csvv = HomePage(driver)
     csvv.make_csv('fragrancedirect.csv', 'Title,Price,updated price,weight,Product overview,Range,Brand,Volume,URL\n')
     csvv.make_csv('fragrancedirect_variiants.csv', f'Url\n')
+    
     current_page = 1
     next_button_xpath = '//*[@class="responsiveProductListPage_bottomPagination"]//button[@class="responsivePaginationNavigationButton paginationNavigationButtonNext"]'
     
@@ -47,14 +48,14 @@ def main():
                 action_chains.key_up(Keys.CONTROL).perform()
                 driver.switch_to.window(driver.window_handles[-1])
                 time.sleep(2)
-                try:
-                    time.sleep(5)
-                    action_chains.send_keys(Keys.ESCAPE).perform()
-                    mainpagee = HomePage(driver)
-                    mainpagee.waiTENt(Fragrancess.Bar)
-                    barr = driver.find_element(By.XPATH, Fragrancess.Bar).click()
-                except Exception as e:
-                    logging.warning(f"No bar found: {e}")   
+                # try:
+                #     time.sleep(5)
+                #     action_chains.send_keys(Keys.ESCAPE).perform()
+                #     mainpagee = HomePage(driver)
+                #     mainpagee.waiTENt(Fragrancess.Bar)
+                #     barr = driver.find_element(By.XPATH, Fragrancess.Bar).click()
+                # except Exception as e:
+                #     logging.warning(f"No bar found: {e}")   
                 try:
                     varriantt = HomePage(driver)
                     varriantt.waiTENt(Fragrancess.varriaannt)
@@ -149,6 +150,7 @@ def main():
                 driver.close()
                 driver.switch_to.window(driver.window_handles[0])
                 logging.error(f"Error processing product on page {current_page}: {e}")
+                
         if not navigate_to_next_page(driver, next_button_xpath):
             logging.info(f"No more pages available. Finished processing.")
             break   
@@ -156,8 +158,8 @@ def main():
         current_page += 1
         time.sleep(5)
 
-        time.sleep(10)
-        driver.quit()
+    time.sleep(10)
+    driver.quit()
 
 if __name__ == "__main__":
     main()
