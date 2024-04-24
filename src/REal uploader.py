@@ -16,6 +16,8 @@ def main():
         driver = initialize_and_navigate(url)
         csvv = HomePage(driver)
         action_chains = ActionChains(driver)
+        csvv.make_csv('uploaded product.csv', 'Titles\n')
+        csvv.make_csv('error_product.csv', 'Titles\n')
         
         mainpage = HomePage(driver)
         mainpage.wait(Uploaderdata.Main_login_page)
@@ -416,12 +418,10 @@ def main():
                     time.sleep(0.5)
                     main_page_storee = HomePage(driver)
                     main_page_storee.wait(Uploaderdata.main_page_store)
-                    csvv.make_csv('uploaded product.csv', 'Titles\n')
                     csvv.make_csv('uploaded product.csv', f'''"{title}"\n''', new=False)
                 except:
                     
                     print(f"error uploading {title}")
-                    csvv.make_csv('error_product.csv', 'Titles\n')
                     time.sleep(1)
                     csvv.make_csv('error_product.csv', f'''"{title}"\n''', new=False)
                     time.sleep(0.5)
