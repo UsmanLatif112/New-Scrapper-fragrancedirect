@@ -56,13 +56,16 @@ class Uploaderdata:
     Variant_size = '//*[@class="Polaris-Layout"]//input[@name="optionName[0]"]'
     Variant_option = '//*[@class="Polaris-Layout"]//input[@name="optionValue[0][0]"]'
     Variant_save = '//*[@class="Polaris-Layout"]//button[@type="button"][contains(normalize-space(), "Done")]'
-    upload_media_btn = '//*[@class="Polaris-LegacyCard"]//button[contains(normalize-space(), "Upload new")]'
+    upload_media_btn = '//*[@class="Polaris-LegacyCard"]//button[contains(normalize-space(), "Add from URL")]'
     after_upload_media = '//*[@class="Polaris-LegacyCard"]//div[@class="_Grid_1o4jr_4"]'
     save_btn = '//*[@id="AppFrame"]//*[@class="Polaris-PageActions"]//button[contains(normalize-space(), "Save")]'
     active_btn_modal = '//*[@id="PolarisPortalsContainer"]//div[@class="Polaris-Box"][contains(normalize-space(), "This product is set to Active")]'
     active_btn = '//*[@id="PolarisPortalsContainer"]//button[contains(normalize-space(), "Save as active")]'
     SKU_CLICK_BTN = '//*[@class="Polaris-Frame__Content"]//div[@class="Polaris-FormLayout__Item Polaris-FormLayout--grouped"][contains(normalize-space(), "This product has a SKU or barcode")]//input[@class="Polaris-Checkbox__Input"]'
     SKU_CLICK_INPUT = '//*[@class="Polaris-Frame__Content"]//div[@class="Polaris-BlockStack"][contains(normalize-space(), "SKU (Stock Keeping Unit)")]//input[@name="sku"]'
+    image_url_modal = '//*[@id="app"]//*[@class="Polaris-Box"][contains(normalize-space(), "Add file from URL")]'
+    image_url_modal_feild = '//*[@id="app"]//*[contains(normalize-space(), "Add file from URL")]//input'
+    image_url_modal_btn = '//*[@id="app"]//*[contains(normalize-space(), "Add file from URL")]//button[contains(normalize-space(), "Add file")]'
     
     
     
