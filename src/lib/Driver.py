@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+import undetected_chromedriver as uc
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 def initialize_and_navigate(url):
     chrome_options = webdriver.ChromeOptions()
@@ -23,3 +26,17 @@ def initialize_and_navigate(url):
     driver.get(url)
 
     return driver
+
+# def get_undetected_chrome_browser(profile=None):
+#     """Returns an instance of an undetected Chrome browser with added features to make it more undetectable and secure.
+#     The browser will save the profile and cookies to the specified folder so that you don't have to log in every time.
+
+#     Returns:
+#         uc.Chrome: An instance of the Chrome class from the undetected_chromedriver library.
+#     """
+#     options = uc.ChromeOptions()
+#     if profile:
+#         options.user_data_dir = f"{BASE_DIR}/profile/{profile}"
+#     driver_version = "122.0.6261.58"  # You can also specify a specific version here
+#     driver_path = ChromeDriverManager(driver_version=driver_version).install()
+#     return uc.Chrome(options=options, executable_path=driver_path)

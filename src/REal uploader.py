@@ -178,7 +178,7 @@ def main():
                             Collectionnn = HomePage(driver)
                             Collectionnn.enter_name(Uploaderdata.Collection, col)
                         
-                            time.sleep(5)
+                            time.sleep(3)
                             action_chains.send_keys(Keys.ENTER).perform()
                             time.sleep(1)
                             time.sleep(1)
@@ -186,7 +186,7 @@ def main():
                             Collectionn.click_btn(Uploaderdata.Collection)
                             time.sleep(1)
                             action_chains.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL).send_keys(Keys.BACK_SPACE).perform()
-                            time.sleep(2)
+                            time.sleep(1)
                             
                     except:
                         pass
@@ -198,7 +198,7 @@ def main():
                         time.sleep(1)
                         Tagsss = HomePage(driver)
                         Tagsss.enter_name(Uploaderdata.Tags, Taggs)
-                        time.sleep(5)
+                        time.sleep(3)
                         action_chains.send_keys(Keys.ENTER).perform()
                         time.sleep(1)
                     except:
@@ -223,34 +223,34 @@ def main():
                         time.sleep(1)
                         
                         if price < 10:
-                            time.sleep(2)
+                            time.sleep(1)
                             Tagsss = HomePage(driver)
                             Tagsss.enter_name(Uploaderdata.Tags, "Less than £10")
-                            time.sleep(2)
+                            time.sleep(1)
                             action_chains.send_keys(Keys.ENTER).perform()
                         elif 10 <= price < 25:
-                            time.sleep(2)
+                            time.sleep(1)
                             Tagsss = HomePage(driver)
                             Tagsss.enter_name(Uploaderdata.Tags, "£10 - £25")
-                            time.sleep(2)
+                            time.sleep(1)
                             action_chains.send_keys(Keys.ENTER).perform()
                         elif 25 <= price < 50:
-                            time.sleep(2)
+                            time.sleep(1)
                             Tagsss = HomePage(driver)
                             Tagsss.enter_name(Uploaderdata.Tags, "£25 - £50")
-                            time.sleep(2)
+                            time.sleep(1)
                             action_chains.send_keys(Keys.ENTER).perform()
                         elif 50 <= price < 100:
-                            time.sleep(2)
+                            time.sleep(1)
                             Tagsss = HomePage(driver)
                             Tagsss.enter_name(Uploaderdata.Tags, "£50 - £100")
-                            time.sleep(2)
+                            time.sleep(1)
                             action_chains.send_keys(Keys.ENTER).perform()
                         elif 100 <= price :
-                            time.sleep(2)
+                            time.sleep(1)
                             Tagsss = HomePage(driver)
                             Tagsss.enter_name(Uploaderdata.Tags, "More than £100")
-                            time.sleep(2)
+                            time.sleep(1)
                             action_chains.send_keys(Keys.ENTER).perform()
                         else:
                             print("Price is out of range")
@@ -299,11 +299,11 @@ def main():
                             except:
                                 pass
                             
-                            time.sleep(10)
+                            time.sleep(8)
                     except Exception as e:
                         print(e)
                         
-                    time.sleep(2)
+                    time.sleep(1)
                     Quantityy = HomePage(driver)
                     Quantityy.click_btn(Uploaderdata.Quantity)
             
@@ -371,7 +371,7 @@ def main():
                             time.sleep(1)
                             image_url_modal_btnn = HomePage(driver)
                             image_url_modal_btnn.click_btn(Uploaderdata.image_url_modal_btn)
-                            time.sleep(10)
+                            time.sleep(8)
                         except:
                             time.sleep(1)
                             action_chains.send_keys(Keys.ESCAPE).perform()
@@ -384,27 +384,27 @@ def main():
                     save_btnn.click_btn(Uploaderdata.save_btn)
                     
                     try:
-                        time.sleep(0.5)
+                        time.sleep(1)
                         active_btn_modall = HomePage(driver)
                         active_btn_modall.waaiite(Uploaderdata.active_btn_modal)
                         
-                        time.sleep(0.5)
+                        time.sleep(1)
                         active_btnn = HomePage(driver)
                         active_btnn.click_btn(Uploaderdata.active_btn)
                     
                     except:
                         print("no modal found")
-                    time.sleep(2)
+                    time.sleep(1)
                     
                     driver.get("https://admin.shopify.com/store/brandlistry/products?selectedView=all")
                     
                     try:
-                        time.sleep(0.5)
+                        time.sleep(1)
                         con_browserr = HomePage(driver)
                         con_browserr.wait(Uploaderdata.con_browser)
                         
                         if con_browserr:
-                            time.sleep(0.5)
+                            time.sleep(1)
                             con_browserrr = HomePage(driver)
                             con_browserrr.click_btn(Uploaderdata.con_browser)
                         
@@ -415,7 +415,7 @@ def main():
                         print("No browser execption found")
                         pass
                         
-                    time.sleep(0.5)
+                    time.sleep(1)
                     main_page_storee = HomePage(driver)
                     main_page_storee.wait(Uploaderdata.main_page_store)
                     csvv.make_csv('uploaded product.csv', f'''"{title}"\n''', new=False)
@@ -423,17 +423,16 @@ def main():
                     
                     print(f"error uploading {title}")
                     time.sleep(1)
-                    csvv.make_csv('error_product.csv', f'''"{title}"\n''', new=False)
-                    time.sleep(0.5)
                     driver.get("https://admin.shopify.com/store/brandlistry/products?selectedView=all")
-                        
+                    csvv.make_csv('error_product.csv', f'''"{title}"\n''', new=False)
+                    time.sleep(1) 
                     try:
-                        time.sleep(0.5)
+                        time.sleep(1)
                         con_browserr = HomePage(driver)
                         con_browserr.wait(Uploaderdata.con_browser)
                         
                         if con_browserr:
-                            time.sleep(0.5)
+                            time.sleep(1)
                             con_browserrr = HomePage(driver)
                             con_browserrr.click_btn(Uploaderdata.con_browser)
                         
@@ -443,11 +442,14 @@ def main():
                     except:
                         print("No browser execption found")
                         pass
-                    pass
+                    continue    
+                    
+                
                     
     except Exception as e:
-        print(e)          
-    time.sleep(10)
+        print(e) 
+                
+    time.sleep(8)
     driver.quit()
 
 if __name__ == "__main__":

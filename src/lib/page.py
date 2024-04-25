@@ -89,6 +89,15 @@ class HomePage(BasePage):
         except Exception as e:
             logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
             raise e
+    def waaiiten(self, xpath, timeout=5):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            logging.warning(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
         
     def waitsix(self, xpath, timeout=120):
         try:
